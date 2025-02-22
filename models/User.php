@@ -62,8 +62,6 @@ class User extends Bdd
       $_SESSION['userId'] = $userLogin['id'];
       $_SESSION['userLogin'] = $userLogin['login'];
       $_SESSION['userRole'] = $userLogin['role'];
-      $userNum = new User();
-      $_SESSION['userNumber'] = $userNum->changeNumber($userLogin['id']);
       header("location: ../index.php");
       exit();
     } else {
@@ -146,15 +144,13 @@ class User extends Bdd
     }
   }
 
-  // Méthode pour un affichage du numéro "001"
-  public function changeNumber($int): string
+  // Méthode pour récupérer tout les USER
+
+  public function getAllUser()
   {
-    if ($int < 10) {
-      return "00" . $int;
-    } elseif ($int < 100) {
-      return "0" . $int;
-    } else {
-      return $int;
-    }
+    $sql = "SELECT user.id, user.login FROM user ORDER BY user.id ASC";
+    $getAllUser = $this->bdd->prepare($sql);
+    $getAllUser->execute();
+    return $getAllUser->fetchAll(PDO::FETCH_ASSOC);
   }
 }

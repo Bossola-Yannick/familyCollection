@@ -2,11 +2,9 @@
 
 main {
   min-height: 75.2vh;
-}
-
-.home-page {
   text-align: center;
 }
+
 .home-page a {
   color: black;
   font-size: 1.5rem;
@@ -50,4 +48,41 @@ main {
 }
 .profil-name {
   max-width: 10rem;
+}
+
+/* ------ CONNEXION ------ */
+
+.login-bloc {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.form {
+  width: 40%;
+  margin: 0 auto;
+  border: 2px solid rgb(95, 141, 27);
+  border-radius: 2rem;
+  padding: 2rem;
+}
+.form input {
+  font-size: 1.5rem;
+  border: 1px solid rgb(95, 141, 27);
+  border-radius: 0.5rem;
+}
+
+/* ------ BUTTON ------ */
+.button {
+  background: #114922;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #c4c4c4;
+  box-shadow: 1px 1px 5px #7af380, -1px -1px 5px #7daf60,
+    inset 1px 1px 5px #93c58e, inset -1px -1px 5px #424242;
+  transition: all 0.1s;
+}
+.button:active {
+  box-shadow: 1px 1px 5px #5b5b5b, -1px -1px 5px #000, inset 1px 1px 5px #5b5b5b,
+    inset -1px -1px 5px #000;
 }

@@ -1,5 +1,5 @@
 <?php include('../components/header.php') ?>
 <main>
-  <h1>C'est ma session</h1>
+  c'est la collection de ????
 </main>
 <?php include('../components/footer.php') ?>
