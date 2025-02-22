@@ -1,1 +1,53 @@
 @import url(./variables.css);
+
+main {
+  min-height: 68.4vh;
+}
+
+.home-page {
+  text-align: center;
+}
+.home-page a {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 4rem 0.5rem;
+}
+.title {
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 4rem auto;
+}
+
+.subtitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 2rem auto;
+}
+.profil {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  margin: 3rem auto;
+}
+
+.profil-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.profil-picture {
+  width: 10rem;
+  height: 10rem;
+  margin: 0 auto;
+  border: 2px solid black;
+  border-radius: 50rem;
+  overflow: hidden;
+}
+.profil-picture img {
+  max-width: 100%;
+  height: 100%;
+}
+.profil-name {
+  max-width: 10rem;
+}
