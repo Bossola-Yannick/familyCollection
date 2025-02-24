@@ -48,41 +48,27 @@ class User extends Bdd
   // Methode connexion
   public function userConnexion($userLogin, $userPass): void
   {
-    $loginStmt = "SELECT user.id, user.login, user.password, user.role 
-        FROM user
-        WHERE login = :userLogin";
+    $loginStmt = "SELECT user.*, avatar.id as avatarId, avatar.nom,avatar.taille,avatar.type,avatar.bin ,avatar.id_user 
+                  FROM user 
+                  LEFT JOIN avatar ON avatar.id_user = user.id
+                  WHERE login = :userLogin";
     $loginStmt = $this->bdd->prepare($loginStmt);
     $loginStmt->execute([
       ':userLogin' => $userLogin
     ]);
     $userLogin = $loginStmt->fetch(PDO::FETCH_ASSOC);
-
     if ($userLogin && (password_verify($userPass, $userLogin['password'])) || ($userLogin && $userPass == $userLogin['password'])) {
-      session_start();
+      // session_start();
       $_SESSION['userId'] = $userLogin['id'];
       $_SESSION['userLogin'] = $userLogin['login'];
       $_SESSION['userRole'] = $userLogin['role'];
-      $userNum = new User();
-      $_SESSION['userNumber'] = $userNum->changeNumber($userLogin['id']);
+      $_SESSION['avatarId'] = $userLogin['avatarId'];
+      $_SESSION['avatarProfil'] = str_replace('../', './', $userLogin['bin']);
       header("location: ../index.php");
       exit();
     } else {
       $_SESSION['message']  = "Pseudo ou mot de passe incorrect!";
     }
-  }
-
-  // Methode pour récuperer toutes les infos d'un utilisateur par ID
-  public function get_allById($userId): array
-  {
-    $getAllStmt = "SELECT user.id, user.login, user.password, user.role
-        FROM user
-        WHERE user.id = :userId";
-    $getAllStmt = $this->bdd->prepare($getAllStmt);
-    $getAllStmt->execute([
-      ':userId' => $userId
-    ]);
-
-    return $getAllStmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   // Méthode pour update user login
@@ -146,15 +132,27 @@ class User extends Bdd
     }
   }
 
-  // Méthode pour un affichage du numéro "001"
-  public function changeNumber($int): string
+  // Méthode pour récupérer tout les USER
+  public function getAllUser()
   {
-    if ($int < 10) {
-      return "00" . $int;
-    } elseif ($int < 100) {
-      return "0" . $int;
-    } else {
-      return $int;
-    }
+    $sql = "SELECT user.*, avatar.id as avatarId, avatar.nom,avatar.taille,avatar.type,avatar.bin ,avatar.id_user 
+                  FROM user 
+                  LEFT JOIN avatar ON avatar.id_user = user.id ORDER BY user.id ASC";
+    $getAllUser = $this->bdd->prepare($sql);
+    $getAllUser->execute();
+    return $getAllUser->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // Méthode pour récupérer un USER par son Id
+  public function getUserById($userId)
+  {
+    $sql = "SELECT user.*, avatar.id as avatarId, avatar.nom,avatar.taille,avatar.type,avatar.bin ,avatar.id_user 
+                  FROM user 
+                  LEFT JOIN avatar ON avatar.id_user = user.id 
+                  WHERE user.id = $userId
+                  ORDER BY user.id ASC";
+    $getAllUser = $this->bdd->prepare($sql);
+    $getAllUser->execute();
+    return $getAllUser->fetchAll(PDO::FETCH_ASSOC);
   }
 }

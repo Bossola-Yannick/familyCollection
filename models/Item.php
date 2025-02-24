@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/Bdd.php");
 
 
-class Comment extends Bdd
+class Item extends Bdd
 {
 
   public function __construct()
@@ -10,83 +10,52 @@ class Comment extends Bdd
     parent::__construct($this->bdd);
   }
 
-  // creation commentaire
-  public function create($comment, $date, $userId)
+
+  // récupération de toute la collection par utilisateur
+  public function getAllItemByUser($userId)
+  {
+    $sql = "SELECT item.*, image.id as imageId, image.nom as ImageNom, image.taille, image.type, image.bin, image.id_item 
+    FROM item
+    LEFT JOIN image On image.id_item = item.id
+    WHERE item.id_user = $userId";
+    $getItem = $this->bdd->prepare($sql);
+    $getItem->execute();
+    return $getItem->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+
+  // creation d'élément de la collection
+  public function createItem($nom, $description, $userId)
   {
 
-    $sql = "INSERT INTO comment (comment, date, id_user) VALUES (:comment, :date, :id_user)";
+    $sql = "INSERT INTO item (nom, description, id_user) VALUES (:nom, :description, :id_user)";
     $create = $this->bdd->prepare($sql);
     $create->execute([
-      ':comment' => $comment,
-      ':date' => $date,
+      ':nom' => $nom,
+      ':description' => $description,
       ':id_user' => $userId
     ]);
   }
 
-  // suppression commentaire
+  // suppression d'élément de la collection
   public function delete($id)
   {
 
-    $sql = "DELETE FROM comment WHERE id = $id";
+    $sql = "DELETE FROM item WHERE id = $id";
     $delete = $this->bdd->prepare($sql);
     $delete->execute();
   }
-  // comptage du nombre de commentaire
-  public function countComment()
-  {
-    $sql = "SELECT COUNT(id) as nbComment FROM comment";
-    $getCount = $this->bdd->prepare($sql);
-    $getCount->execute();
-    return $getCount->fetchAll(PDO::FETCH_ASSOC);;
-  }
-  // récupération de tout les commentaire et pagination
-  public function getAllComments($whichPage, $perPage)
-  {
-    $sql = "SELECT comment.id, comment.comment, DATE_FORMAT(comment.date,\"%d/%m/%Y %H:%i:%s\") as date, user.id as userId, user.login
-                FROM comment
-                JOIN user ON comment.id_user = user.id
-                ORDER BY date DESC
-                LIMIT " . (($whichPage - 1) * $perPage) . ",$perPage";
-    $getAll = $this->bdd->prepare($sql);
-    $getAll->execute();
-    return $getAll->fetchAll(PDO::FETCH_ASSOC);
-  }
-  // récupération des 5 dernier commentaires
-  public function getfiveLastComment()
-  {
-    $sql = "SELECT comment.id, comment.comment, DATE_FORMAT(comment.date,\"%d/%m/%Y\") as date, user.id as userId, user.login
-                FROM comment
-                JOIN user ON comment.id_user = user.id
-                ORDER BY date DESC
-                LIMIT 5";
-    $getAll = $this->bdd->prepare($sql);
-    $getAll->execute();
-    return $getAll->fetchAll(PDO::FETCH_ASSOC);
-  }
-  // récupération des 5 dernier commentaires
-  public function getAllCommentByUser($userId)
-  {
-    $sql = "SELECT comment.id, comment.comment, DATE_FORMAT(comment.date,\"%d/%m/%Y\") as date, user.login
-                FROM comment
-                JOIN user ON comment.id_user = user.id
-                WHERE user.id = $userId
-                ORDER BY date DESC";
-    $getAll = $this->bdd->prepare($sql);
-    $getAll->execute();
-    return $getAll->fetchAll(PDO::FETCH_ASSOC);
-  }
 
-  // récupération de tout les commentaires avec un mot de recherche
-  public function getAllCommentsSearch($word, $whichPage, $perPage)
+  // récupérer le dernier ITEM créer
+  public function getLastItem()
   {
-    $sql = "SELECT comment.id, comment.comment, DATE_FORMAT(comment.date,\"%d/%m/%Y\") as date, user.id as userId, user.login
-                FROM comment
-                JOIN user ON comment.id_user = user.id
-                WHERE comment LIKE '%$word%'
-                ORDER BY date DESC
-                LIMIT " . (($whichPage - 1) * $perPage) . ",$perPage";
-    $getAll = $this->bdd->prepare($sql);
-    $getAll->execute();
-    return $getAll->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql = "SELECT id
+  FROM item
+  ORDER BY id DESC
+  LIMIT 1";
+    $selectLast = $this->bdd->prepare($sql);
+    $selectLast->execute();
+    return $selectLast->fetchAll(PDO::FETCH_ASSOC);
   }
 }
