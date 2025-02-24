@@ -13,3 +13,4 @@ Le but est de faire en sorte que chaque membre de la famille puisse ajouter/supp
 - HTML
 - CSS
 - PHP
+- SQL
