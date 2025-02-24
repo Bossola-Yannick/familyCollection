@@ -32,9 +32,9 @@ if (isset($_POST['submit'])) {
       <section class="login-bloc">
         <form method="post" action="" class="form">
           <label for="" class="label-form">Pseudo :</label><br />
-          <input class="input" type="text" name="pseudo" id="pseudo" value="" placeholder="Entrez votre pseudo" required><br /><br />
+          <input class="edit-input" type="text" name="pseudo" id="pseudo" value="" placeholder="Entrez votre pseudo" required><br /><br />
           <label for="" class="label-form">Mot de Passe :</label><br />
-          <input class="input" type="password" name="password" id="password" value="" placeholder="Entrez votre mot de passe" required><br /><br />
+          <input class="edit-input" type="password" name="password" id="password" value="" placeholder="Entrez votre mot de passe" required><br /><br />
           <button type="submit" name="submit" class="button">Valider</button>
           <?php if (isset($_SESSION['message'])): ?>
             <p class="alert"><?= $_SESSION['message'] ?></p>
