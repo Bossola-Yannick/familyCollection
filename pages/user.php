@@ -4,7 +4,6 @@ include_once("../models/User.php");
 include_once("../models/Item.php");
 include_once("../models/Avatar.php");
 session_start();
-
 $newUser = new User();
 $getCollection = new Item();
 $collection = $getCollection->getAllItemByUser($_SESSION['userId']);
@@ -131,7 +130,7 @@ if (isset($_POST['update-avatar'])) {
     </form>
 
     <!-- Créer/Modifier AVATAR -->
-    <?php if (empty($_SESSION['avatarProfil'])) : ?>
+    <?php if (empty($_SESSION['avatar'][0]['bin'])) : ?>
       <div class="edit-avatar">
         <p class="profil-text">Changer Avatar</p>
         <form enctype="multipart/form-data" action="" method="post">
@@ -161,7 +160,7 @@ if (isset($_POST['update-avatar'])) {
     <?php foreach ($collection as $item): ?>
       <article class="item-card">
         <div class="item-picture-box">
-          <img src="#" alt="photo item" class="item-picture">
+          <img src="<?= $item['bin'] ?>" alt="photo item" class="item-picture">
         </div>
         <h2 class="item-name"><?= $item['nom'] ?></h2>
         <p class="item-description"><?= $item['description'] ?></p>

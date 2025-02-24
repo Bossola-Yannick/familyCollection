@@ -12,7 +12,7 @@ main {
   padding: 4rem 0.5rem;
 }
 .title {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 900;
   margin: 4rem auto;
 }
@@ -70,7 +70,7 @@ main {
   padding: 1rem 0;
 }
 .form input {
-  font-size: 1.5rem;
+  font-size: 1rem;
   border: 1px solid rgb(95, 141, 27);
   border-radius: 0.5rem;
   margin-top: 0.5rem;

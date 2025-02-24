@@ -21,7 +21,7 @@ if (isset($_POST['return'])) {
     <?php foreach ($collection as $item): ?>
       <article class="item-card">
         <div class="item-picture-box">
-          <img src="#" alt="photo item" class="item-picture">
+          <img src="<?= $item['bin'] ?>" alt="photo item" class="item-picture">
         </div>
         <h2 class="item.name"><?= $item['nom'] ?></h2>
         <p class="item.description"><?= $item['description'] ?></p>
