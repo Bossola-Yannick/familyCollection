@@ -90,15 +90,11 @@ body {
   font-weight: bold;
   font-size: 1.4rem;
 }
-
 .box-account {
   display: flex;
   justify-content: center;
   gap: 2rem;
   height: 100%;
-}
-.logo-admin {
-  max-height: 100%;
 }
 .icon-account {
   background-color: #587f7a00;
@@ -112,7 +108,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .header-user-logo {

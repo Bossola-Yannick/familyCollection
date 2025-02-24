@@ -1,6 +1,6 @@
 -- EFFACEMENT DES TABLES
 
-DROP TABLE IF EXISTS profil_image;
+DROP TABLE IF EXISTS avatar;
 DROP TABLE IF EXISTS image;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS user;
@@ -34,8 +34,8 @@ CREATE TABLE image (
     FOREIGN KEY (id_item) REFERENCES item(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
--- Création de la table PROFIL_IMAGE
-CREATE TABLE profil_image (
+-- Création de la table AVATAR
+CREATE TABLE avatar (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255) NOT NULL,
     taille INT,
