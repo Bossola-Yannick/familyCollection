@@ -15,11 +15,14 @@ if (isset($_POST['user-collection'])) {
   exit();
 }
 
-if ((isset($_SESSION['userId'])) && !empty($_SESSION['avatarProfil'])) {
+if (isset($_SESSION['userId'])) {
   $userConnect = $getUsers->getUserById($_SESSION['userId']);
-  $avatarProfil = str_replace('../', './', $userConnect[0]['bin']);
+  if (empty($userConnect[0]['bin'])) {
+    $avatarProfil = "./assets/img/boule_7.png";
+  } else {
+    $avatarProfil = str_replace('../', './', $userConnect[0]['bin']);
+  }
 }
-
 
 // deconnexion
 if (isset($_POST['logout'])) {
@@ -51,9 +54,7 @@ if (isset($_POST['logout'])) {
           <img src="./assets/img/KameHouse.ico" class="logo-header" alt="accueil" />
         </a>
       </div>
-
       <img class="quiz-logo" src="./assets/img/mycollection.png" />
-
       <div class="logo-login">
         <a href="./pages/connexion.php">
           <img src="./assets/img/sheronBall.ico" alt="connexion">
@@ -67,26 +68,30 @@ if (isset($_POST['logout'])) {
         </a>
       </div>
       <img class="quiz-logo" src="./assets/img/mycollection.png" />
-      <div class="logo-box">
-        <form method="post" action="" class="box-login-disconnect">
-          <?php if (!empty($_SESSION['avatarProfil'])): ?>
+      <form method="post" action="" class="box-login-disconnect">
+        <?php if (isset($avatarProfil)) : ?>
+          <div class="logo-box">
             <button class="icon-account" type="submit" name="user-profil">
               <div class="box-account">
                 <img src="<?= $avatarProfil ?>" alt="avatar" />
               </div>
             </button>
-          <?php else : ?>
+          </div>
+        <?php else : ?>
+          <div class="logo-box">
             <button class="icon-account" type="submit" name="user-profil">
               <div class="box-account">
                 <img src="./assets/img/boule_7.png" alt="avatar" />
               </div>
             </button>
-          <?php endif ?>
+          </div>
+        <?php endif ?>
+        <div class="logo-box">
           <button class="icon-account" type="submit" name="logout">
             <img src="./assets/img/deconnexion.png" alt="deconnexion" />
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     <?php endif; ?>
 
   </header>
