@@ -107,7 +107,7 @@ if (isset($_POST['logout'])) {
         <?php if (!empty($user['bin'])) {
           $avatar = str_replace('../', './', $user['bin']);
         } else $avatar = "./assets/img/boule_7.png" ?>
-        <article class="profil-item">
+        <article class="profil-item" id="article">
           <form method="post">
             <input type="hidden" name="collectionId" value=<?= $user['id'] ?>>
             <input type="hidden" name="collectionLogin" value=<?= $user['login'] ?>>
@@ -137,6 +137,6 @@ if (isset($_POST['logout'])) {
 
 
 
-
+  <style src="./js/index.js"></style>
 
   <?php include("./components/footer.php") ?>

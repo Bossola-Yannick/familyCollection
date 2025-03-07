@@ -30,7 +30,7 @@ class Image extends Bdd
   // modifier image
   public function updateImage($id_image, $nom, $taille, $type, $tmp_name, $id_quiz)
   {
-    $target_dir = "../asset/img/quiz/";
+    $target_dir = "../assets/img/items";
     $target_file = $target_dir . basename($nom);
     if (move_uploaded_file($tmp_name, $target_file)) {
       $sql = "UPDATE image SET nom = :nom, taille =:taille, type =:type, bin =:bin, id_quiz=:id_quiz WHERE id = :id";
