@@ -160,7 +160,7 @@ if (isset($_POST['update-avatar'])) {
     <?php foreach ($collection as $item): ?>
       <article class="item-card">
         <div class="item-picture-box">
-          <img src="<?= $item['bin'] ?>" alt="photo item" class="item-picture">
+          <img src="../assets/img/Lamu 3.jpg" alt="photo item" class="item-picture">
         </div>
         <h2 class="item-name"><?= $item['nom'] ?></h2>
         <p class="item-description"><?= $item['description'] ?></p>
@@ -169,7 +169,26 @@ if (isset($_POST['update-avatar'])) {
         </form>
       </article>
     <?php endforeach ?>
-
+    <article class="item-card">
+      <div class="item-picture-box">
+        <img src="../assets/img/lamu-pockets.jpg" alt="photo item" class="item-picture">
+      </div>
+      <h2 class="item-name"><?= $item['nom'] ?></h2>
+      <p class="item-description"><?= $item['description'] ?></p>
+      <form action="" method="post">
+        <button type="submit" class="button button-red " name="delete-item" value="<?= $item['id'] ?>">X</button>
+      </form>
+    </article>
+    <article class="item-card">
+      <div class="item-picture-box">
+        <img src="../assets/img/Goku-SSJ4.jpg" alt="photo item" class="item-picture">
+      </div>
+      <h2 class="item-name"><?= $item['nom'] ?></h2>
+      <p class="item-description"><?= $item['description'] ?></p>
+      <form action="" method="post">
+        <button type="submit" class="button button-red " name="delete-item" value="<?= $item['id'] ?>">X</button>
+      </form>
+    </article>
   </section>
 </main>
 <?php include('../components/footer.php') ?>
