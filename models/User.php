@@ -62,6 +62,7 @@ class User extends Bdd
       $_SESSION['userId'] = $userLogin['id'];
       $_SESSION['userLogin'] = $userLogin['login'];
       $_SESSION['userRole'] = $userLogin['role'];
+      $_SESSION['familyId'] = $userLogin['id_famille'];
       $_SESSION['avatarId'] = $userLogin['avatarId'];
       $_SESSION['avatarProfil'] = str_replace('../', './', $userLogin['bin']);
       header("location: ../index.php");
